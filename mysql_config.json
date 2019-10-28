@@ -1,0 +1,19 @@
+[
+  {
+    "server_name": "89RootServer",
+    "server_id": 1,
+    "host": "10.141.221.89",
+    "user": "root",
+    "password": "root",
+    "description": "the mysql for all kg work",
+    "charset":"utf8mb4",
+    "databases": [
+      {
+        "database_id": 1,
+        "database_name": "stackoverflow",
+        "description": "stack overflow",
+        "charset":"utf8mb4"
+      }
+    ]
+  }
+]

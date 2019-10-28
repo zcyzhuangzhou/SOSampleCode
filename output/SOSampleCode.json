@@ -1,0 +1,12 @@
+[
+    {
+        "API": "IOUtils",
+        "Code": "StringWriter writer = new StringWriter();\nIOUtils.copy(inputStream, writer, encoding);\nString theString = writer.toString();\n",
+        "Description": "A nice way to do this is using Apache commons IOUtils to copy the InputStream into a StringWriter... something like or even"
+    },
+    {
+        "API": "IOUtils",
+        "Code": "// NB: does not close inputStream, you'll have to use try-with-resources for that\nString theString = IOUtils.toString(inputStream, encoding); \n",
+        "Description": "or even Alternatively, you could use ByteArrayOutputStream if you don't want to mix your Streams and Writers"
+    }
+]
