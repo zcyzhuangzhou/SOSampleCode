@@ -23,13 +23,15 @@ def extract_code(qualified_names):
     for post in posts:
         for item in post:
             htmls.add(item)
+
     for html in htmls:
         # 解析question的HTML文本
         soup_html = BeautifulSoup(html, 'lxml')
         # 找到所有<pre><code>……</pre></code>标签的内容
         pre_codes = soup_html.findAll("pre")
+
         if not pre_codes:
-            break
+            continue
         else:
             # 用所有的API全限定名来遍历所有的<pre><code>……</pre></code>标签内容
             for pre_code in pre_codes:
@@ -37,11 +39,17 @@ def extract_code(qualified_names):
                     if qualified_name in pre_code.get_text():
                         API = qualified_name
                         Code = pre_code.get_text()
-
+                        print(API)
                         # 获取样例代码上下文各一段文本描述
-                        pre_Description = pre_code.find_previous_sibling().get_text()
-                        next_Description = pre_code.find_next_sibling().get_text()
-                        Description = pre_Description + ' ' + next_Description
+                        if not pre_code.find_previous_sibling():
+                            pre_description = ''
+                        else:
+                            pre_description = pre_code.find_previous_sibling().get_text()
+                        if not pre_code.find_next_sibling():
+                            next_description = ''
+                        else:
+                            next_description = pre_code.find_next_sibling().get_text()
+                        Description = pre_description + ' ' + next_description
 
                         # 将全限定名，样例代码，文本描述保存
                         json_save = {}
